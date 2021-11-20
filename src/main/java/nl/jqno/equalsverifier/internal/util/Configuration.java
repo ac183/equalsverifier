@@ -23,6 +23,7 @@ public final class Configuration<T> {
     private final boolean hasRedefinedSuperclass;
     private final Class<? extends T> redefinedSubclass;
     private final boolean usingGetClass;
+    private final boolean usingBigDecimalCompareTo;
     private final EnumSet<Warning> warningsToSuppress;
 
     private final TypeTag typeTag;
@@ -47,6 +48,7 @@ public final class Configuration<T> {
         boolean hasRedefinedSuperclass,
         Class<? extends T> redefinedSubclass,
         boolean usingGetClass,
+        boolean usingBigDecimalCompareTo,
         EnumSet<Warning> warningsToSuppress,
         List<T> equalExamples,
         List<T> unequalExamples
@@ -62,6 +64,7 @@ public final class Configuration<T> {
         this.hasRedefinedSuperclass = hasRedefinedSuperclass;
         this.redefinedSubclass = redefinedSubclass;
         this.usingGetClass = usingGetClass;
+        this.usingBigDecimalCompareTo = usingBigDecimalCompareTo;
         this.warningsToSuppress = warningsToSuppress;
         this.equalExamples = equalExamples;
         this.unequalExamples = unequalExamples;
@@ -76,6 +79,7 @@ public final class Configuration<T> {
         boolean hasRedefinedSuperclass,
         Class<? extends T> redefinedSubclass,
         boolean usingGetClass,
+        boolean usingBigDecimalCompareTo,
         EnumSet<Warning> warningsToSuppress,
         FactoryCache factoryCache,
         Set<String> ignoredAnnotationClassNames,
@@ -110,6 +114,7 @@ public final class Configuration<T> {
             hasRedefinedSuperclass,
             redefinedSubclass,
             usingGetClass,
+            usingBigDecimalCompareTo,
             warningsToSuppress,
             equalExamples,
             unequals
@@ -223,6 +228,10 @@ public final class Configuration<T> {
 
     public boolean isUsingGetClass() {
         return usingGetClass;
+    }
+
+    public boolean isUsingBigDecimalCompareTo() {
+        return usingBigDecimalCompareTo;
     }
 
     public EnumSet<Warning> getWarningsToSuppress() {

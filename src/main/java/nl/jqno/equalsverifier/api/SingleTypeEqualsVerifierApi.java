@@ -24,6 +24,7 @@ public class SingleTypeEqualsVerifierApi<T> implements EqualsVerifierApi<T> {
 
     private EnumSet<Warning> warningsToSuppress = EnumSet.noneOf(Warning.class);
     private boolean usingGetClass = false;
+    private boolean usingBigDecimalCompareTo = false;
     private boolean hasRedefinedSuperclass = false;
     private Class<? extends T> redefinedSubclass = null;
     private FactoryCache factoryCache = new FactoryCache();
@@ -53,17 +54,21 @@ public class SingleTypeEqualsVerifierApi<T> implements EqualsVerifierApi<T> {
      * @param factoryCache Factories that can be used to create values.
      * @param usingGetClass Whether {@code getClass} is used in the implementation of the {@code
      *     equals} method, instead of an {@code instanceof} check.
+     * @param usingBigDecimalCompareTo Whether {@code compareTo} is used for {@code BigDecimal}
+     *     field equality check in the implementation of the {@code equals} method.
      */
     public SingleTypeEqualsVerifierApi(
         Class<T> type,
         EnumSet<Warning> warningsToSuppress,
         FactoryCache factoryCache,
-        boolean usingGetClass
+        boolean usingGetClass,
+        boolean usingBigDecimalCompareTo
     ) {
         this(type);
         this.warningsToSuppress = EnumSet.copyOf(warningsToSuppress);
         this.factoryCache = this.factoryCache.merge(factoryCache);
         this.usingGetClass = usingGetClass;
+        this.usingBigDecimalCompareTo = usingBigDecimalCompareTo;
     }
 
     /**
@@ -125,6 +130,13 @@ public class SingleTypeEqualsVerifierApi<T> implements EqualsVerifierApi<T> {
     @Override
     public SingleTypeEqualsVerifierApi<T> usingGetClass() {
         this.usingGetClass = true;
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public SingleTypeEqualsVerifierApi<T> usingBigDecimalCompareTo() {
+        usingBigDecimalCompareTo = true;
         return this;
     }
 
@@ -379,6 +391,7 @@ public class SingleTypeEqualsVerifierApi<T> implements EqualsVerifierApi<T> {
             hasRedefinedSuperclass,
             redefinedSubclass,
             usingGetClass,
+            usingBigDecimalCompareTo,
             warningsToSuppress,
             factoryCache,
             ignoredAnnotationClassNames,

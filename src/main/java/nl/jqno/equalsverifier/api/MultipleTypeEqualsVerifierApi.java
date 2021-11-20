@@ -68,6 +68,13 @@ public class MultipleTypeEqualsVerifierApi implements EqualsVerifierApi<Void> {
         return this;
     }
 
+    /** {@inheritDoc} */
+    @Override
+    public MultipleTypeEqualsVerifierApi usingBigDecimalCompareTo() {
+        ev.usingBigDecimalCompareTo();
+        return this;
+    }
+
     /**
      * Removes the given type or types from the list of types to verify.
      *

@@ -78,4 +78,12 @@ public interface EqualsVerifierApi<T> {
      * @see Warning#STRICT_INHERITANCE
      */
     public EqualsVerifierApi<T> usingGetClass();
+
+    /**
+     * Checks that equality of {@code BigDecimal} fields is implemented using {@code compareTo}
+     * rather than {@code equals}.
+     *
+     * @return {@code this}, for easy method chaining.
+     */
+    public EqualsVerifierApi<T> usingBigDecimalCompareTo();
 }

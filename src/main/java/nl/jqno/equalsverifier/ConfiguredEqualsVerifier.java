@@ -19,6 +19,7 @@ public final class ConfiguredEqualsVerifier implements EqualsVerifierApi<Void> {
     private final EnumSet<Warning> warningsToSuppress;
     private final FactoryCache factoryCache;
     private boolean usingGetClass;
+    private boolean usingBigDecimalCompareTo;
 
     /** Constructor. */
     public ConfiguredEqualsVerifier() {
@@ -90,6 +91,13 @@ public final class ConfiguredEqualsVerifier implements EqualsVerifierApi<Void> {
         return this;
     }
 
+    /** {@inheritDoc} */
+    @Override
+    public ConfiguredEqualsVerifier usingBigDecimalCompareTo() {
+        usingBigDecimalCompareTo = true;
+        return this;
+    }
+
     /**
      * Factory method. For general use.
      *
@@ -102,7 +110,8 @@ public final class ConfiguredEqualsVerifier implements EqualsVerifierApi<Void> {
             type,
             EnumSet.copyOf(warningsToSuppress),
             factoryCache,
-            usingGetClass
+            usingGetClass,
+            usingBigDecimalCompareTo
         );
     }
 
